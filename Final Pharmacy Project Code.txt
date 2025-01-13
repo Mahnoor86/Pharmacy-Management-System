@@ -1,0 +1,50 @@
+create database pharmacymanagementsystem;
+use pharmacymanagementsystem;
+
+------------------------------ Pharmacist Tasks--------------------------------------------------
+-- Table Creation Qurey
+--------------------------------------------------------------------------------------------------
+create table pharmacist(
+pharmacistId int primary key,
+pharfirstname varchar(255),
+pharlastname varchar(255),
+pharcontact varchar(255),
+shift varchar(255),
+licensenumber varchar(255)
+);
+
+-----------------------------------------------------------------------------------------------
+-- View Pharmacist Qurey
+----------------------------------------------------------------------------------------------
+select * from pharmacist;
+-----------------------------------------------------------------------------------------------
+-- Table Creation Qurey Pharmacist Login 
+-----------------------------------------------------------------------------------------------
+create table PharmacistLogin(
+pharUsername varchar(255),
+pharPassword int
+);
+
+insert into PharmacistLogin(pharUsername, pharPassword)
+values("phar", 123);
+select * from PharmacistLogin;
+
+
+create table AdminLogin(
+adminUsername varchar(255),
+adminPassword int
+);
+
+insert into AdminLogin(adminUsername, adminPassword)
+values("adminn",123);
+select * from AdminLogin;
+
+create table Medicine (medicine_name varchar(225) primary key,medicine_quantity int,medicine_price int);
+select * from Medicine;
+
+create table Customer_Buy(
+med_name varchar(225),
+med_buy int,
+pharmacist_id int, foreign key (pharmacist_id) references pharmacist (pharmacistId)
+);
+select * from Customer_Buy left join pharmacist on pharmacist.pharmacistId=Customer_Buy.pharmacist_id;
