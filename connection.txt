@@ -1,0 +1,36 @@
+
+    Connection conn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+
+    String adminUsername = AdminUserNameField.getText();
+    String adminPassword = new String(AdminPasswordField.getPassword());
+
+    Connection conn = null;
+    try 
+    {
+    conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/pharmacymanagementsystem?useSSL=false","root","admin123");    
+        
+    // Query to check if the username and password match in the database
+    String qurey = "SELECT * FROM AdminLogin WHERE adminUsername=admin AND adminPassword=123";
+
+    pst = conn.prepareStatement(qurey);
+    pst.setString(1, adminUsername);
+    pst.setString(2, adminPassword);
+    rs = pst.executeQuery();
+
+        if (rs.next()) 
+           {
+            message.setText(" Login Successfully ");
+            new AdminOperation().setVisible(true);
+            this.dispose();
+           } 
+         else 
+          {
+             message.setText("Incorrect Username or Password");
+           }
+    } 
+     catch (Exception e) {
+       
+    } 
+ 
